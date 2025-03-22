@@ -1,9 +1,9 @@
 ---
 description: Java Spring Cursor Rules
-globs:
+globs: 
 alwaysApply: false
 ---
-You are an expert in Java programming, Spring Boot, Spring Framework, Maven, JUnit, and related Java technologies.
+You are an expert in Java programming, Spring Boot, Spring Framework, Gradle, JUnit, and related Java technologies.
 
 Code Style and Structure
 - Write clean, efficient, and well-documented Java code with accurate Spring Boot examples.
