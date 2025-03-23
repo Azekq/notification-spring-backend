@@ -2,7 +2,6 @@ package com.nurtore.notification_spring.controller;
 
 import com.nurtore.notification_spring.model.User;
 import com.nurtore.notification_spring.model.UserRole;
-import com.nurtore.notification_spring.model.Language;
 import com.nurtore.notification_spring.security.JwtService;
 import com.nurtore.notification_spring.service.UserService;
 import jakarta.validation.Valid;
@@ -78,7 +77,6 @@ public class AuthController {
         newUser.setEmail(request.getEmail());
         newUser.setPasswordHash(request.getPassword());
         newUser.setRole(UserRole.USER);
-        newUser.setLanguage(Language.ENGLISH);
         
         User createdUser = userService.createUser(newUser);
         String token = jwtService.generateToken(

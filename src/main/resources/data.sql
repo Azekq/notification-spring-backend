@@ -1,13 +1,13 @@
 -- Test Users (password is 'password' encoded with BCrypt)
-INSERT INTO users (id, name, email, password_hash, role, language, created_at)
+INSERT INTO users (id, name, email, password_hash, role, created_at)
 VALUES 
-('22222222-2222-2222-2222-222222222222', 'Manager User', 'manager@example.com', '$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG', 'MANAGER', 'EN', CURRENT_TIMESTAMP),
-('33333333-3333-3333-3333-333333333333', 'Regular User', 'user@example.com', '$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG', 'USER', 'EN', CURRENT_TIMESTAMP);
+('22222222-2222-2222-2222-222222222222', 'Manager User', 'manager@example.com', '$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG', 'MANAGER', CURRENT_TIMESTAMP),
+('33333333-3333-3333-3333-333333333333', 'Regular User', 'user@example.com', '$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG', 'USER', CURRENT_TIMESTAMP);
 
 -- Admin user (password is 'admin' encoded with BCrypt)
-INSERT INTO users (id, name, email, password_hash, role, language, created_at)
+INSERT INTO users (id, name, email, password_hash, role, created_at)
 VALUES 
-('11111111-1111-1111-1111-111111111111', 'Admin User', 'admin@example.com', '$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG', 'ADMIN', 'EN', CURRENT_TIMESTAMP)
+('11111111-1111-1111-1111-111111111111', 'Admin User', 'admin@example.com', '$2a$10$dXJ3SW6G7P50lGmMkkmwe.20cQQubK3.HZWzG3YB1tlRy.fqvM/BG', 'ADMIN', CURRENT_TIMESTAMP)
 ON CONFLICT (email) DO UPDATE 
 SET password_hash = EXCLUDED.password_hash;
 
