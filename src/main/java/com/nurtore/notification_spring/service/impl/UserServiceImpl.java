@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
         }
         
         // Encode password before saving
-        user.setPasswordHash(passwordEncoder.encode(user.getPasswordHash()));
+        user.setPasswordHash(passwordEncoder.encode(user.getPasswordHash())); // user.getPasswordHash() is the password not password hash, but later gets hashed
         return userRepository.save(user);
     }
 
