@@ -33,7 +33,7 @@ public class AuthController {
         @NotBlank(message = "Email is required")
         @Email(message = "Invalid email format")
         private String email;
-        
+
         @NotBlank(message = "Password is required")
         private String password;
     }
@@ -42,11 +42,11 @@ public class AuthController {
     public static class RegisterRequest {
         @NotBlank(message = "Name is required")
         private String name;
-        
+
         @NotBlank(message = "Email is required")
         @Email(message = "Invalid email format")
         private String email;
-        
+
         @NotBlank(message = "Password is required")
         private String password;
     }
@@ -57,16 +57,16 @@ public class AuthController {
         private final User user;
     }
 
+    // TODO: Implement the "last login at" feature
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AuthResponse> login(@RequestBody @Valid LoginRequest request) {
         Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
-        );
-        
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String token = jwtService.generateToken(userDetails);
         User user = userService.getUserByEmail(userDetails.getUsername()).orElseThrow();
-        
+
         return ResponseEntity.ok(new AuthResponse(token, user));
     }
 
@@ -77,16 +77,15 @@ public class AuthController {
         newUser.setEmail(request.getEmail());
         newUser.setPasswordHash(request.getPassword());
         newUser.setRole(UserRole.USER);
-        
+
         User createdUser = userService.createUser(newUser);
         String token = jwtService.generateToken(
-            org.springframework.security.core.userdetails.User.builder()
-                .username(createdUser.getEmail())
-                .password(createdUser.getPasswordHash())
-                .authorities("ROLE_" + createdUser.getRole().name())
-                .build()
-        );
-        
+                org.springframework.security.core.userdetails.User.builder()
+                        .username(createdUser.getEmail())
+                        .password(createdUser.getPasswordHash())
+                        .authorities("ROLE_" + createdUser.getRole().name())
+                        .build());
+
         return ResponseEntity.ok(new AuthResponse(token, createdUser));
     }
-} 
+}
