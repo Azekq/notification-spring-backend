@@ -32,7 +32,7 @@ public class NotificationController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(notificationService.createNotification(notification));
     }
-
+// TODO: 500 Internal Error --- "Type definition error: [simple type, class org.hibernate.proxy.pojo.bytebuddy.ByteBuddyInterceptor]"
     @PostMapping("/schedule")
     @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     public ResponseEntity<Notification> scheduleNotification(
